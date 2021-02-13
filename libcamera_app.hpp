@@ -22,9 +22,6 @@
 #include "frame_info.hpp"
 #include "null_preview.hpp"
 
-// Crikey, X11/Xlib.h actually contains "#define Status int". Since when was that OK?
-#undef Status
-
 #include <libcamera/camera.h>
 #include <libcamera/camera_manager.h>
 #include <libcamera/control_ids.h>

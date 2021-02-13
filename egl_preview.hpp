@@ -10,12 +10,14 @@
 #include <map>
 #include <string>
 
-#include <X11/Xlib.h>
-
 #include <epoxy/egl.h>
 #include <epoxy/gl.h>
 
 #include "preview.hpp"
+
+#include <X11/Xlib.h>
+// Crikey, X11/Xlib.h actually contains "#define Status int". Since when was that OK?
+#undef Status
 
 class EglPreview : public Preview
 {
