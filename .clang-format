@@ -71,11 +71,23 @@ ForEachMacros:
   - BOOST_FOREACH
 IncludeBlocks:   Preserve
 IncludeCategories:
-  - Regex:           '^"(llvm|llvm-c|clang|clang-c)/'
-    Priority:        2
-    SortPriority:    0
-  - Regex:           '^(<|"(gtest|isl|json)/)'
+  - Regex:           '^<libcamera/'
     Priority:        3
+    SortPriority:    0
+  - Regex:           '^<(drm|X11|epoxy)/'
+    Priority:        4
+    SortPriority:    0
+  - Regex:           '^<boost/'
+    Priority:        5
+    SortPriority:    0
+  - Regex:           '^<(jpeg|libexif|png|tiff)'
+    Priority:        5
+    SortPriority:    0
+  - Regex:           '<.*\.h>'
+    Priority:        7
+    SortPriority:    0
+  - Regex:           '<.*>'
+    Priority:        6
     SortPriority:    0
   - Regex:           '.*'
     Priority:        1
