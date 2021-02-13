@@ -37,7 +37,7 @@ sudo apt install libboost-dev
 sudo apt install libgnutls28-dev openssl libtiff5-dev
 sudo apt install qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5
 sudo apt install meson
-sudo pip3 install pyyaml ply
+sudo pip3 install Jinja2 pyyaml ply
 ```
 
 The Qt libraries are purely for the qcam demo application supplied with libcamera, but are otherwise not essential to its operation.
