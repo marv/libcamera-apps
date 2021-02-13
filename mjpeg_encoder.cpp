@@ -5,10 +5,10 @@
  * mjpeg_encoder.cpp - mjpeg video encoder.
  */
 
+#include "mjpeg_encoder.hpp"
+#include <jpeglib.h>
 #include <chrono>
 #include <iostream>
-#include <jpeglib.h>
-#include "mjpeg_encoder.hpp"
 
 #if JPEG_LIB_VERSION_MAJOR > 9 || (JPEG_LIB_VERSION_MAJOR == 9 && JPEG_LIB_VERSION_MINOR >= 4)
 typedef size_t jpeg_mem_len_t;

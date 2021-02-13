@@ -5,9 +5,9 @@
  * egl_preview.cpp - X/EGL-based preview window.
  */
 
-#include <libdrm/drm_fourcc.h>
 #include "egl_preview.hpp"
 #include <X11/Xutil.h>
+#include <libdrm/drm_fourcc.h>
 
 static GLint compile_shader(GLenum target, const char *source)
 {

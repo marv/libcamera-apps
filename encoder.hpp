@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include <functional>
 #include "video_options.hpp"
+#include <functional>
 
 typedef std::function<void(int)> InputDoneCallback;
 typedef std::function<void(void *, size_t, int64_t, bool)> OutputReadyCallback;

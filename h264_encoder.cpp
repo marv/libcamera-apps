@@ -5,14 +5,14 @@
  * h264_encoder.cpp - h264 video encoder.
  */
 
+#include "h264_encoder.hpp"
+#include <chrono>
+#include <iostream>
 #include <fcntl.h>
+#include <linux/videodev2.h>
 #include <poll.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
-#include <linux/videodev2.h>
-#include <chrono>
-#include <iostream>
-#include "h264_encoder.hpp"
 
 static int xioctl(int fd, int ctl, void *arg)
 {

@@ -5,12 +5,12 @@
  * png.cpp - Encode image as png and write to file.
  */
 
-#include <cstdio>
-#include <string>
+#include "still_options.hpp"
 #include <libcamera/formats.h>
 #include <libcamera/pixel_format.h>
 #include <png.h>
-#include "still_options.hpp"
+#include <cstdio>
+#include <string>
 
 void png_save(std::vector<void *> const &mem, int w, int h, int stride,
 			  libcamera::PixelFormat const &pixel_format, std::string const &filename,

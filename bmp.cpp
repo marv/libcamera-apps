@@ -5,10 +5,10 @@
  * bmp.cpp - Encode image as bmp and write to file.
  */
 
+#include "still_options.hpp"
+#include <libcamera/formats.h>
 #include <cstdio>
 #include <string>
-#include <libcamera/formats.h>
-#include "still_options.hpp"
 
 struct ImageHeader
 {

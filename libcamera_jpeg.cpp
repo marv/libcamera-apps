@@ -5,9 +5,9 @@
  * libcamera_jpeg.cpp - minimal libcamera jpeg capture app.
  */
 
-#include <chrono>
 #include "libcamera_app.hpp"
 #include "still_options.hpp"
+#include <chrono>
 
 using namespace std::placeholders;
 

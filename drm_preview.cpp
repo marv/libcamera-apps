@@ -5,12 +5,12 @@
  * drm_preview.cpp - DRM-based preview window.
  */
 
+#include "drm_preview.hpp"
 #include <drm.h>
+#include <drm_fourcc.h>
 #include <drm_mode.h>
 #include <xf86drm.h>
 #include <xf86drmMode.h>
-#include <drm_fourcc.h>
-#include "drm_preview.hpp"
 
 #define ERRSTR strerror(errno)
 

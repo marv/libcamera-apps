@@ -7,9 +7,9 @@
 
 #pragma once
 
+#include "options.hpp"
 #include <functional>
 #include <string>
-#include "options.hpp"
 
 class Preview
 {

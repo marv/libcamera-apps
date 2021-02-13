@@ -5,12 +5,12 @@
  * dng.cpp - Save raw image as DNG file.
  */
 
-#include <map>
+#include "still_options.hpp"
 #include <libcamera/control_ids.h>
 #include <libcamera/formats.h>
 #include <libcamera/pixel_format.h>
 #include <tiffio.h>
-#include "still_options.hpp"
+#include <map>
 
 using namespace libcamera;
 

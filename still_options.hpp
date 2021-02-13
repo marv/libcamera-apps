@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include <cstdio>
 #include "options.hpp"
+#include <cstdio>
 
 struct StillOptions : public Options
 {

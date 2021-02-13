@@ -7,9 +7,9 @@
 
 #pragma once
 
-#include <cstdio>
-#include <atomic>
 #include "video_options.hpp"
+#include <atomic>
+#include <cstdio>
 
 class Output
 {

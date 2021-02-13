@@ -5,13 +5,13 @@
  * libcamera_vid.cpp - libcamera video record app.
  */
 
+#include "libcamera_encoder.hpp"
+#include "output.hpp"
 #include <chrono>
 #include <poll.h>
 #include <signal.h>
 #include <sys/signalfd.h>
 #include <sys/stat.h>
-#include "libcamera_encoder.hpp"
-#include "output.hpp"
 
 using namespace std::placeholders;
 

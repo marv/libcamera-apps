@@ -5,13 +5,13 @@
  * libcamera_still.cpp - libcamera stills capture app.
  */
 
+#include "libcamera_app.hpp"
+#include "still_options.hpp"
+#include <chrono>
 #include <poll.h>
 #include <signal.h>
 #include <sys/signalfd.h>
 #include <sys/stat.h>
-#include <chrono>
-#include "libcamera_app.hpp"
-#include "still_options.hpp"
 
 using namespace std::placeholders;
 

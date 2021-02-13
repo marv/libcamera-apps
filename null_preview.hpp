@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include <iostream>
 #include "preview.hpp"
+#include <iostream>
 
 class NullPreview : public Preview
 {

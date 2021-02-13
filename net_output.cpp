@@ -5,9 +5,9 @@
  * net_output.cpp - send output over network.
  */
 
+#include "net_output.hpp"
 #include <arpa/inet.h>
 #include <sys/socket.h>
-#include "net_output.hpp"
 
 NetOutput::NetOutput(VideoOptions const &options) : Output(options)
 {

@@ -5,9 +5,9 @@
  * libcamera_hello.cpp - libcamera "hello world" app.
  */
 
-#include <chrono>
 #include "libcamera_app.hpp"
 #include "options.hpp"
+#include <chrono>
 
 using namespace std::placeholders;
 

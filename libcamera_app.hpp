@@ -7,14 +7,6 @@
 
 #pragma once
 
-#include <sys/mman.h>
-#include <condition_variable>
-#include <iostream>
-#include <mutex>
-#include <queue>
-#include <string>
-#include <thread>
-#include <variant>
 #include "drm_preview.hpp"
 #include "egl_preview.hpp"
 #include "frame_info.hpp"
@@ -26,6 +18,14 @@
 #include <libcamera/formats.h>
 #include <libcamera/framebuffer_allocator.h>
 #include <libcamera/property_ids.h>
+#include <condition_variable>
+#include <iostream>
+#include <mutex>
+#include <queue>
+#include <string>
+#include <thread>
+#include <variant>
+#include <sys/mman.h>
 
 namespace controls = libcamera::controls;
 namespace properties = libcamera::properties;

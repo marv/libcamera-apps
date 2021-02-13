@@ -5,19 +5,19 @@
  * jpeg.cpp - Encode image as jpeg and write to file.
  */
 
-#include <cstdio>
-#include <cstring>
-#include <algorithm>
-#include <iostream>
-#include <map>
-#include <stdexcept>
-#include <vector>
+#include "still_options.hpp"
 #include <libcamera/control_ids.h>
 #include <libcamera/formats.h>
 #include <libcamera/pixel_format.h>
 #include <jpeglib.h>
 #include <libexif/exif-data.h>
-#include "still_options.hpp"
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+#include <map>
+#include <stdexcept>
+#include <vector>
 
 #if JPEG_LIB_VERSION_MAJOR > 9 || (JPEG_LIB_VERSION_MAJOR == 9 && JPEG_LIB_VERSION_MINOR >= 4)
 typedef size_t jpeg_mem_len_t;

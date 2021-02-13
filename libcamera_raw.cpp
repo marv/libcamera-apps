@@ -5,10 +5,10 @@
  * libcamera_raw.cpp - libcamera raw video record app.
  */
 
-#include <chrono>
 #include "libcamera_encoder.hpp"
 #include "null_encoder.hpp"
 #include "output.hpp"
+#include <chrono>
 
 using namespace std::placeholders;
 

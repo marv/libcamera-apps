@@ -7,12 +7,12 @@
 
 #pragma once
 
+#include "encoder.hpp"
+#include "video_options.hpp"
 #include <condition_variable>
 #include <mutex>
 #include <queue>
 #include <thread>
-#include "encoder.hpp"
-#include "video_options.hpp"
 
 class NullEncoder : public Encoder
 {

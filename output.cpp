@@ -5,12 +5,14 @@
  * output.cpp - video stream output base class
  */
 
-#include <cinttypes>
-#include <stdexcept>
+#include "output.hpp"
 #include "circular_output.hpp"
 #include "file_output.hpp"
 #include "net_output.hpp"
-#include "output.hpp"
+#include <chrono>
+#include <cinttypes>
+#include <iomanip>
+#include <stdexcept>
 
 Output::Output(VideoOptions const &options) :
 	state_(WAITING_KEYFRAME),

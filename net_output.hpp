@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include <netinet/in.h>
 #include "output.hpp"
+#include <netinet/in.h>
 
 class NetOutput : public Output
 {

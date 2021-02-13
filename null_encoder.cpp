@@ -5,10 +5,10 @@
  * null_encoder.cpp - dummy "do nothing" video encoder.
  */
 
+#include "null_encoder.hpp"
 #include <chrono>
 #include <iostream>
 #include <stdexcept>
-#include "null_encoder.hpp"
 
 NullEncoder::NullEncoder(VideoOptions const &options) :
 	abort_(false), input_count_(0), output_count_(0), Encoder(options)
