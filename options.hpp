@@ -8,9 +8,7 @@
 #pragma once
 
 #include <iostream>
-
 #include <boost/program_options.hpp>
-
 #include <libcamera/control_ids.h>
 #include <libcamera/transform.h>
 

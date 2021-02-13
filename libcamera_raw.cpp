@@ -6,7 +6,6 @@
  */
 
 #include <chrono>
-
 #include "libcamera_encoder.hpp"
 #include "null_encoder.hpp"
 #include "output.hpp"

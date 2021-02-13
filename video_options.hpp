@@ -8,9 +8,7 @@
 #pragma once
 
 #include <cstdio>
-
 #include <string>
-
 #include "options.hpp"
 
 struct VideoOptions : public Options

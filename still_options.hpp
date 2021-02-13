@@ -8,7 +8,6 @@
 #pragma once
 
 #include <cstdio>
-
 #include "options.hpp"
 
 struct StillOptions : public Options

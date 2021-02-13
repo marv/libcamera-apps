@@ -7,9 +7,7 @@
 
 #include <cstdio>
 #include <string>
-
 #include <libcamera/formats.h>
-
 #include "still_options.hpp"
 
 struct ImageHeader

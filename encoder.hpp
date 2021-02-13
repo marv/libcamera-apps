@@ -8,7 +8,6 @@
 #pragma once
 
 #include <functional>
-
 #include "video_options.hpp"
 
 typedef std::function<void(int)> InputDoneCallback;

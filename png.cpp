@@ -7,12 +7,9 @@
 
 #include <cstdio>
 #include <string>
-
 #include <libcamera/formats.h>
 #include <libcamera/pixel_format.h>
-
 #include <png.h>
-
 #include "still_options.hpp"
 
 void png_save(std::vector<void *> const &mem, int w, int h, int stride,

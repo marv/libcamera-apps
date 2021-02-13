@@ -7,7 +7,6 @@
 
 #include <arpa/inet.h>
 #include <sys/socket.h>
-
 #include "net_output.hpp"
 
 NetOutput::NetOutput(VideoOptions const &options) : Output(options)

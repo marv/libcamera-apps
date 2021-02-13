@@ -9,10 +9,8 @@
 
 #include <map>
 #include <string>
-
 #include <epoxy/egl.h>
 #include <epoxy/gl.h>
-
 #include "preview.hpp"
 
 #include <X11/Xlib.h>

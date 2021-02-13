@@ -8,7 +8,6 @@
 #pragma once
 
 #include <sys/mman.h>
-
 #include <condition_variable>
 #include <iostream>
 #include <mutex>
@@ -16,12 +15,10 @@
 #include <string>
 #include <thread>
 #include <variant>
-
 #include "drm_preview.hpp"
 #include "egl_preview.hpp"
 #include "frame_info.hpp"
 #include "null_preview.hpp"
-
 #include <libcamera/camera.h>
 #include <libcamera/camera_manager.h>
 #include <libcamera/control_ids.h>

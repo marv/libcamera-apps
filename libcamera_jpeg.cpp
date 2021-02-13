@@ -6,7 +6,6 @@
  */
 
 #include <chrono>
-
 #include "libcamera_app.hpp"
 #include "still_options.hpp"
 

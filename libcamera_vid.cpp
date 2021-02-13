@@ -10,7 +10,6 @@
 #include <signal.h>
 #include <sys/signalfd.h>
 #include <sys/stat.h>
-
 #include "libcamera_encoder.hpp"
 #include "output.hpp"
 

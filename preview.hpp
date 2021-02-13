@@ -9,7 +9,6 @@
 
 #include <functional>
 #include <string>
-
 #include "options.hpp"
 
 class Preview

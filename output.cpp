@@ -7,7 +7,6 @@
 
 #include <cinttypes>
 #include <stdexcept>
-
 #include "circular_output.hpp"
 #include "file_output.hpp"
 #include "net_output.hpp"

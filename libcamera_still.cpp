@@ -9,9 +9,7 @@
 #include <signal.h>
 #include <sys/signalfd.h>
 #include <sys/stat.h>
-
 #include <chrono>
-
 #include "libcamera_app.hpp"
 #include "still_options.hpp"
 

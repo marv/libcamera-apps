@@ -6,7 +6,6 @@
  */
 
 #include <cstring>
-
 #include "encoder.hpp"
 #include "h264_encoder.hpp"
 #include "mjpeg_encoder.hpp"

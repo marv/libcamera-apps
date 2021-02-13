@@ -8,7 +8,6 @@
 #pragma once
 
 #include <iostream>
-
 #include "preview.hpp"
 
 class NullPreview : public Preview

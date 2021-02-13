@@ -8,7 +8,6 @@
 #include <chrono>
 #include <iostream>
 #include <stdexcept>
-
 #include "null_encoder.hpp"
 
 NullEncoder::NullEncoder(VideoOptions const &options) :

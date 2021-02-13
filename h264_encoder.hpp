@@ -11,7 +11,6 @@
 #include <mutex>
 #include <queue>
 #include <thread>
-
 #include "encoder.hpp"
 
 class H264Encoder : public Encoder

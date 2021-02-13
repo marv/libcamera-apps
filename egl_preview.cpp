@@ -6,9 +6,7 @@
  */
 
 #include <libdrm/drm_fourcc.h>
-
 #include "egl_preview.hpp"
-
 #include <X11/Xutil.h>
 
 static GLint compile_shader(GLenum target, const char *source)

@@ -7,9 +7,7 @@
 
 #include <chrono>
 #include <iostream>
-
 #include <jpeglib.h>
-
 #include "mjpeg_encoder.hpp"
 
 #if JPEG_LIB_VERSION_MAJOR > 9 || (JPEG_LIB_VERSION_MAJOR == 9 && JPEG_LIB_VERSION_MINOR >= 4)

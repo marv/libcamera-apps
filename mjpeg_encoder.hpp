@@ -11,7 +11,6 @@
 #include <mutex>
 #include <queue>
 #include <thread>
-
 #include "encoder.hpp"
 
 struct jpeg_compress_struct;

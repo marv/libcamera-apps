@@ -6,13 +6,10 @@
  */
 
 #include <map>
-
 #include <libcamera/control_ids.h>
 #include <libcamera/formats.h>
 #include <libcamera/pixel_format.h>
-
 #include <tiffio.h>
-
 #include "still_options.hpp"
 
 using namespace libcamera;

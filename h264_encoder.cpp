@@ -9,12 +9,9 @@
 #include <poll.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
-
 #include <linux/videodev2.h>
-
 #include <chrono>
 #include <iostream>
-
 #include "h264_encoder.hpp"
 
 static int xioctl(int fd, int ctl, void *arg)
