@@ -1,0 +1,79 @@
+name: libcamera-apps CI
+
+on: [push, pull_request]
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout libcamera-apps
+      uses: actions/checkout@v2
+      with:
+        path: apps
+
+    - name: Checkout libcamera
+      shell: bash
+      run: |
+        git clone git://linuxtv.org/libcamera.git
+
+    - uses: actions/setup-python@v2
+
+    - name: Install libcamera dependencies
+      run: |
+        sudo apt install --no-install-recommends \
+            libboost-dev \
+            libgnutls28-dev \
+            libqt5core5a \
+            libqt5gui5 \
+            libqt5widgets5 \
+            libtiff5-dev \
+            ninja-build \
+            openssl \
+            qtbase5-dev
+        python -m pip install --upgrade pip
+        pip install Jinja2 pyyaml ply
+        pip install setuptools
+        pip install meson
+
+    - name: Install libcamera-apps dependencies
+      run: |
+        sudo apt install --no-install-recommends \
+            libboost-program-options-dev \
+            libdrm-dev \
+            libegl1-mesa-dev \
+            libepoxy-dev \
+            libexif-dev
+
+    - name: Build libcamera
+      shell: bash
+      working-directory: ${{github.workspace}}/libcamera
+      run: |
+        mkdir build
+        cd build
+        meson .. -Dpipelines=raspberrypi -Dtest=false -Dgstreamer=disabled -Dtracing=disabled
+        ninja
+        sudo ninja install
+
+    - name: Create Build Environment
+      run: cmake -E make_directory ${{github.workspace}}/apps/build
+
+    - name: Configure CMake
+      shell: bash
+      working-directory: ${{github.workspace}}/apps/build
+      # Note the current convention is to use the -S and -B options here to specify source
+      # and build directories, but this is only available with CMake 3.13 and higher.
+      # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
+      run: |
+        cmake $GITHUB_WORKSPACE/apps \
+            -DCMAKE_BUILD_TYPE=$BUILD_TYPE \
+            -DENABLE_COMPILE_FLAGS_FOR_TARGET=x86_64
+
+    - name: Build
+      working-directory: ${{github.workspace}}/apps/build
+      shell: bash
+      run: cmake --build . --config $BUILD_TYPE
