@@ -20,6 +20,7 @@ struct VideoOptions : public Options
 		using namespace boost::program_options;
 		// Generally we shall use zero or empty values to avoid over-writing the
 		// codec's default behaviour.
+		// clang-format off
 		options_.add_options()
 			("bitrate,b", value<uint32_t>(&bitrate)->default_value(0),
 			 "Set the bitrate for encoding, in bits/second (h264 only)")
@@ -52,6 +53,7 @@ struct VideoOptions : public Options
 			("circular", value<bool>(&circular)->default_value(false)->implicit_value(true),
 			 "Write output to a circular buffer which is saved on exit")
 			;
+		// clang-format on
 	}
 
 	uint32_t bitrate;
