@@ -19,6 +19,7 @@ struct Options
 	Options() : options_("Valid options are")
 	{
 		using namespace boost::program_options;
+		// clang-format off
 		options_.add_options()
 			("help,h", value<bool>(&help)->default_value(false)->implicit_value(true),
 			 "Print this help message")
@@ -82,6 +83,7 @@ struct Options
 			("denoise", value<std::string>(&denoise)->default_value("auto"),
 			 "Sets the Denoise operating mode: auto, off, cdn_off, cdn_fast, cdn_hq")
 			;
+		// clang-format on
 	}
 
 	bool help;
