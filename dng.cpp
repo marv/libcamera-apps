@@ -194,9 +194,11 @@ void dng_save(std::vector<void *> const &mem, int w, int h, int stride,
 	}
 
 	// Use a slightly plausible default CCM in case the metadata doesn't have one (it should!).
+	// clang-format off
 	Matrix CCM(1.90255, -0.77478, -0.12777,
 			   -0.31338, 1.88197, -0.56858,
 			   -0.06001, -0.61785, 1.67786);
+	// clang-format on
 	if (metadata.contains(controls::ColourCorrectionMatrix)) {
 		Span<const float> const &coeffs = metadata.get(controls::ColourCorrectionMatrix);
 		CCM = Matrix(coeffs[0], coeffs[1], coeffs[2],
@@ -207,9 +209,11 @@ void dng_save(std::vector<void *> const &mem, int w, int h, int stride,
 		std::cout << "WARNING: no CCM metadata found" << std::endl;
 
 	// This maxtrix from http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html
+	// clang-format off
 	Matrix RGB2XYZ(0.4124564, 0.3575761, 0.1804375,
 				   0.2126729, 0.7151522, 0.0721750,
 				   0.0193339, 0.1191920, 0.9503041);
+	// clang-format on
 	Matrix CAM_XYZ = (RGB2XYZ * CCM * WB_GAINS).Inv();
 
 	if (options.verbose) {
