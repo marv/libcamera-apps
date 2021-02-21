@@ -16,6 +16,7 @@ struct StillOptions : public Options
 	StillOptions() : Options()
 	{
 		using namespace boost::program_options;
+		// clang-format off
 		options_.add_options()
 			("quality,q", value<int>(&quality)->default_value(93),
 			 "Set the JPEG quality parameter")
@@ -44,6 +45,7 @@ struct StillOptions : public Options
 			("latest", value<std::string>(&latest),
 			 "Create a symbolic link with this name to most recent saved file")
 			;
+		// clang-format on
 	}
 
 	int quality;
