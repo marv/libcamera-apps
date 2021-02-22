@@ -6,6 +6,19 @@ env:
   BUILD_TYPE: Release
 
 jobs:
+  clang-format:
+    name: clang-format Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run clang-format style check for C/C++ programs.
+        uses: jidicula/clang-format-action@v3.1.0
+        with:
+          clang-format-version: '11'
+          check-path: '.'
+
   build:
     runs-on: ubuntu-latest
 
