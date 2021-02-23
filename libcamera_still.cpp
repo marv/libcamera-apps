@@ -217,9 +217,10 @@ static void event_loop(LibcameraStill &app)
 			if (timed_out || keypressed || timelapse_timed_out)
 			{
 				// Trigger a still capture unless:
-				if (!output ||                      // we have no output file
-					(timed_out && options.timelapse) || // timed out in timelapse mode
-					(!keypressed && keypress))      // no key was pressed (in keypress mode)
+				//  - we have no output file
+				//  - we timed out in timelapse mode
+				//  - no key was pressed (in keypress mode)
+				if (!output || (timed_out && options.timelapse) || (!keypressed && keypress))
 					return;
 				else
 				{
