@@ -7,7 +7,8 @@
 
 #include "circular_output.hpp"
 
-static constexpr int CIRCULAR_BUFFER_SIZE = 1<<22; // 4MB, we could consider this more carefully...
+// 4MB, we could consider this more carefully...
+static constexpr int CIRCULAR_BUFFER_SIZE = 1<<22;
 
 // We're going to align the frames within the buffer to friendly byte boundaries
 static constexpr int ALIGN = 16; // power of 2, please
