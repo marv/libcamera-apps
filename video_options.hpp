@@ -77,7 +77,7 @@ struct VideoOptions : public Options
 	{
 		if (Options::Parse(argc, argv) == false)
 			return false;
-		
+
 		if (width == 0)
 			width = 640;
 		if (height == 0)
@@ -97,7 +97,8 @@ struct VideoOptions : public Options
 		else
 			throw std::runtime_error("incorrect initial value " + initial);
 		if ((pause || split || segment || circular) && !inline_headers)
-			std::cout << "WARNING: consider inline headers with 'pause'/split/segment/circular" << std::endl;
+			std::cout << "WARNING: consider inline headers with 'pause'/split/segment/circular"
+					  << std::endl;
 		if ((split || segment) && output.find('%') == std::string::npos)
 			std::cout << "WARNING: expected % directive in output filename" << std::endl;
 

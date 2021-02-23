@@ -14,7 +14,8 @@
 class NullPreview : public Preview
 {
 public:
-	NullPreview(Options const &options) : Preview(options) {
+	NullPreview(Options const &options) : Preview(options)
+	{
 		if (options.verbose)
 			std::cout << "Running without preview window" << std::endl;
 	}
@@ -27,8 +28,7 @@ public:
 	}
 	// Reset the preview window, clearing the current buffers and being ready to
 	// show new ones.
-	void Reset() override
-	{
-	}
+	void Reset() override {}
+
 private:
 };

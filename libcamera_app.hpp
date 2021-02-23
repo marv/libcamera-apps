@@ -9,29 +9,28 @@
 
 #include <sys/mman.h>
 
+#include <condition_variable>
 #include <iostream>
-#include <string>
-#include <queue>
 #include <mutex>
-#include <condition_variable>
-#include <variant>
+#include <queue>
+#include <string>
 #include <thread>
-#include <condition_variable>
+#include <variant>
 
-#include "null_preview.hpp"
-#include "egl_preview.hpp"
 #include "drm_preview.hpp"
+#include "egl_preview.hpp"
 #include "frame_info.hpp"
+#include "null_preview.hpp"
 
 // Crikey, X11/Xlib.h actually contains "#define Status int". Since when was that OK?
 #undef Status
 
-#include <libcamera/camera_manager.h>
 #include <libcamera/camera.h>
-#include <libcamera/formats.h>
-#include <libcamera/framebuffer_allocator.h>
+#include <libcamera/camera_manager.h>
 #include <libcamera/control_ids.h>
 #include <libcamera/controls.h>
+#include <libcamera/formats.h>
+#include <libcamera/framebuffer_allocator.h>
 #include <libcamera/property_ids.h>
 
 namespace controls = libcamera::controls;
@@ -42,8 +41,10 @@ struct CompletedRequest
 	using BufferMap = libcamera::Request::BufferMap;
 	using ControlList = libcamera::ControlList;
 	CompletedRequest() {}
-	CompletedRequest(unsigned int seq, BufferMap const &b, ControlList const &m)
-		: sequence(seq), buffers(b), metadata(m) {}
+	CompletedRequest(unsigned int seq, BufferMap const &b, ControlList const &m) :
+		sequence(seq), buffers(b), metadata(m)
+	{
+	}
 	unsigned int sequence;
 	BufferMap buffers;
 	ControlList metadata;
@@ -71,7 +72,9 @@ public:
 	using BufferMap = Request::BufferMap;
 	using Size = libcamera::Size;
 	using Rectangle = libcamera::Rectangle;
-	struct QuitPayload {};
+	struct QuitPayload
+	{
+	};
 	enum class MsgType
 	{
 		RequestComplete,
@@ -89,16 +92,16 @@ public:
 	OPTIONS options;
 
 	// Some flags that can be used to give hints to the camera configuration.
-	static constexpr unsigned int FLAG_STILL_NONE   =  0;
-	static constexpr unsigned int FLAG_STILL_BGR    =  1;  // supply BGR images, not YUV
-	static constexpr unsigned int FLAG_STILL_RGB    =  2;  // supply RGB images, not YUV
-	static constexpr unsigned int FLAG_STILL_RAW    =  4;  // request raw image stream
-	static constexpr unsigned int FLAG_STILL_DOUBLE_BUFFER = 8;  // double-buffer stream
+	static constexpr unsigned int FLAG_STILL_NONE = 0;
+	static constexpr unsigned int FLAG_STILL_BGR = 1;			 // supply BGR images, not YUV
+	static constexpr unsigned int FLAG_STILL_RGB = 2;			 // supply RGB images, not YUV
+	static constexpr unsigned int FLAG_STILL_RAW = 4;			 // request raw image stream
+	static constexpr unsigned int FLAG_STILL_DOUBLE_BUFFER = 8;	 // double-buffer stream
 	static constexpr unsigned int FLAG_STILL_TRIPLE_BUFFER = 16; // triple-buffer stream
-	static constexpr unsigned int FLAG_STILL_BUFFER_MASK   = 24; // mask for buffer flags
+	static constexpr unsigned int FLAG_STILL_BUFFER_MASK = 24;	 // mask for buffer flags
 
-	static constexpr unsigned int FLAG_VIDEO_NONE   =  0;
-	static constexpr unsigned int FLAG_VIDEO_RAW    =  1;  // request raw image stream
+	static constexpr unsigned int FLAG_VIDEO_NONE = 0;
+	static constexpr unsigned int FLAG_VIDEO_RAW = 1; // request raw image stream
 
 	LibcameraApp() : preview_thread_(&LibcameraApp::previewThread, this) {}
 	virtual ~LibcameraApp()
@@ -110,9 +113,9 @@ public:
 		}
 		preview_thread_.join();
 		if (options.verbose && !options.help)
-			std::cout << "Closing Libcamera application" << "(frames displayed "
-					  << preview_frames_displayed_ << ", dropped " << preview_frames_dropped_
-					  << ")" << std::endl;
+			std::cout << "Closing Libcamera application"
+					  << "(frames displayed " << preview_frames_displayed_ << ", dropped "
+					  << preview_frames_dropped_ << ")" << std::endl;
 		StopCamera();
 		Teardown();
 		CloseCamera();
@@ -131,7 +134,7 @@ public:
 				if (options.verbose)
 					std::cout << "Made X/EGL preview window" << std::endl;
 			}
-			catch(std::exception const &e)
+			catch (std::exception const &e)
 			{
 				try
 				{
@@ -146,7 +149,8 @@ public:
 				}
 			}
 		}
-		preview_->SetDoneCallback(std::bind(&LibcameraApp::previewDoneCallback, this, std::placeholders::_1));
+		preview_->SetDoneCallback(
+			std::bind(&LibcameraApp::previewDoneCallback, this, std::placeholders::_1));
 
 		if (options.verbose)
 			std::cout << "Opening camera..." << std::endl;
@@ -154,7 +158,8 @@ public:
 		camera_manager_ = std::make_unique<CameraManager>();
 		int ret = camera_manager_->start();
 		if (ret)
-			throw std::runtime_error("camera manager failed to start, code " + std::to_string(-ret));
+			throw std::runtime_error("camera manager failed to start, code " +
+									 std::to_string(-ret));
 
 		if (camera_manager_->cameras().size() == 0)
 			throw std::runtime_error("no cameras available");
@@ -328,8 +333,8 @@ public:
 
 		// Build a list of initial controls that we must set in the camera before starting it.
 		// We don't overwrite anything the application may have set before calling us.
-		if (!controls_.contains(controls::ScalerCrop) &&
-			options.roi_width != 0 && options.roi_height != 0)
+		if (!controls_.contains(controls::ScalerCrop) && options.roi_width != 0 &&
+			options.roi_height != 0)
 		{
 			Rectangle sensor_area = camera_->properties().get(properties::ScalerCropMaximum);
 			int x = options.roi_x * sensor_area.width;
@@ -369,8 +374,7 @@ public:
 			controls_.set(controls::ExposureValue, options.ev);
 		if (!controls_.contains(controls::AwbMode))
 			controls_.set(controls::AwbMode, options.awb_index);
-		if (!controls_.contains(controls::ColourGains) &&
-			options.awb_gain_r && options.awb_gain_b)
+		if (!controls_.contains(controls::ColourGains) && options.awb_gain_r && options.awb_gain_b)
 			controls_.set(controls::ColourGains, { options.awb_gain_r, options.awb_gain_b });
 		if (!controls_.contains(controls::Brightness))
 			controls_.set(controls::Brightness, options.brightness);
@@ -541,7 +545,7 @@ private:
 		T Wait()
 		{
 			std::unique_lock<std::mutex> lock(mutex_);
-			cond_.wait(lock, [this] { return !queue_.empty(); } );
+			cond_.wait(lock, [this] { return !queue_.empty(); });
 			T msg = std::move(queue_.front());
 			queue_.pop();
 			return msg;
@@ -551,6 +555,7 @@ private:
 			std::unique_lock<std::mutex> lock(mutex_);
 			queue_ = {};
 		}
+
 	private:
 		std::queue<T> queue_;
 		std::mutex mutex_;
@@ -601,7 +606,8 @@ private:
 				for (unsigned i = 0; i < buffer->planes().size(); i++)
 				{
 					const FrameBuffer::Plane &plane = buffer->planes()[i];
-					void *memory = mmap(NULL, plane.length, PROT_READ, MAP_SHARED,plane.fd.fd(), 0);
+					void *memory =
+						mmap(NULL, plane.length, PROT_READ, MAP_SHARED, plane.fd.fd(), 0);
 					mapped_buffers_[buffer.get()].push_back(memory);
 				}
 				frame_buffers_[stream].push(buffer.get());
@@ -738,10 +744,12 @@ private:
 		};
 		NoiseReductionModeEnum denoise;
 
-		if (options.denoise == "auto") {
-			denoise = video_mode ? NoiseReductionModeFast
-					     : NoiseReductionModeHighQuality;
-		} else {
+		if (options.denoise == "auto")
+		{
+			denoise = video_mode ? NoiseReductionModeFast : NoiseReductionModeHighQuality;
+		}
+		else
+		{
 			auto const mode = denoise_table.find(options.denoise);
 			if (mode == denoise_table.end())
 				throw std::runtime_error("Invalid denoise mode " + options.denoise);

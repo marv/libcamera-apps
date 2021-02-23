@@ -28,8 +28,7 @@ NullEncoder::~NullEncoder()
 }
 
 // Push the buffer onto the output queue to be "encoded" and returned.
-int NullEncoder::EncodeBuffer(int fd, size_t size,
-							  void *mem, int width, int height, int stride,
+int NullEncoder::EncodeBuffer(int fd, size_t size, void *mem, int width, int height, int stride,
 							  int64_t timestamp_us)
 {
 	std::lock_guard<std::mutex> lock(output_mutex_);

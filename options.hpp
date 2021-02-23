@@ -135,8 +135,8 @@ struct Options
 			return false;
 		}
 
-		if (sscanf(preview.c_str(), "%u,%u,%u,%u",
-				   &preview_x, &preview_y, &preview_width, &preview_height) != 4)
+		if (sscanf(preview.c_str(), "%u,%u,%u,%u", &preview_x, &preview_y, &preview_width,
+				   &preview_height) != 4)
 			preview_x = preview_y = preview_width = preview_height = 0; // use default window
 
 		transform = Transform::Identity;
@@ -152,40 +152,42 @@ struct Options
 		if (!!(transform & Transform::Transpose))
 			throw std::runtime_error("transforms requiring transpose not supported");
 
-		if (sscanf(roi.c_str(), "%f,%f,%f,%f",
-				   &roi_x, &roi_y, &roi_width, &roi_height) != 4)
+		if (sscanf(roi.c_str(), "%f,%f,%f,%f", &roi_x, &roi_y, &roi_width, &roi_height) != 4)
 			roi_x = roi_y = roi_width = roi_height = 0; // don't set digital zoom
 
-		std::map<std::string, int> metering_table =
-			{ { "centre", libcamera::controls::MeteringCentreWeighted },
-			  { "spot", libcamera::controls::MeteringSpot },
-			  { "average", libcamera::controls::MeteringMatrix },
-			  { "matrix", libcamera::controls::MeteringMatrix },
-			  { "custom", libcamera::controls::MeteringCustom } };
+		std::map<std::string, int> metering_table = {
+			{ "centre", libcamera::controls::MeteringCentreWeighted },
+			{ "spot", libcamera::controls::MeteringSpot },
+			{ "average", libcamera::controls::MeteringMatrix },
+			{ "matrix", libcamera::controls::MeteringMatrix },
+			{ "custom", libcamera::controls::MeteringCustom }
+		};
 		if (metering_table.count(metering) == 0)
 			throw std::runtime_error("Invalid metering mode: " + metering);
 		metering_index = metering_table[metering];
 
-		std::map<std::string, int> exposure_table =
-			{ { "normal", libcamera::controls::ExposureNormal },
-			  { "sport", libcamera::controls::ExposureShort },
-			  { "short", libcamera::controls::ExposureShort },
-			  // long mode?
-			  { "custom", libcamera::controls::ExposureCustom } };
+		std::map<std::string, int> exposure_table = {
+			{ "normal", libcamera::controls::ExposureNormal },
+			{ "sport", libcamera::controls::ExposureShort },
+			{ "short", libcamera::controls::ExposureShort },
+			// long mode?
+			{ "custom", libcamera::controls::ExposureCustom }
+		};
 		if (exposure_table.count(exposure) == 0)
 			throw std::runtime_error("Invalid exposure mode:" + exposure);
 		exposure_index = exposure_table[exposure];
 
-		std::map<std::string, int> awb_table =
-			{ { "auto", libcamera::controls::AwbAuto },
-			  { "normal", libcamera::controls::AwbAuto },
-			  { "incandescent", libcamera::controls::AwbIncandescent },
-			  { "tungsten", libcamera::controls::AwbTungsten },
-			  { "fluorescent", libcamera::controls::AwbFluorescent },
-			  { "indoor", libcamera::controls::AwbIndoor },
-			  { "daylight", libcamera::controls::AwbDaylight },
-			  { "cloudy", libcamera::controls::AwbCloudy },
-			  { "custom", libcamera::controls::AwbCustom } };
+		std::map<std::string, int> awb_table = {
+			{ "auto", libcamera::controls::AwbAuto },
+			{ "normal", libcamera::controls::AwbAuto },
+			{ "incandescent", libcamera::controls::AwbIncandescent },
+			{ "tungsten", libcamera::controls::AwbTungsten },
+			{ "fluorescent", libcamera::controls::AwbFluorescent },
+			{ "indoor", libcamera::controls::AwbIndoor },
+			{ "daylight", libcamera::controls::AwbDaylight },
+			{ "cloudy", libcamera::controls::AwbCloudy },
+			{ "custom", libcamera::controls::AwbCustom }
+		};
 		if (awb_table.count(awb) == 0)
 			throw std::runtime_error("Invalid AWB mode: " + awb);
 		awb_index = awb_table[awb];
@@ -194,9 +196,9 @@ struct Options
 			throw std::runtime_error("Invalid AWB gains");
 
 		brightness = std::clamp(brightness, -1.0f, 1.0f);
-		contrast = std::clamp(contrast, 0.0f, 15.99f); // limits are arbitrary..
+		contrast = std::clamp(contrast, 0.0f, 15.99f);	   // limits are arbitrary..
 		saturation = std::clamp(saturation, 0.0f, 15.99f); // limits are arbitrary..
-		sharpness = std::clamp(sharpness, 0.0f, 15.99f); // limits are arbitrary..
+		sharpness = std::clamp(sharpness, 0.0f, 15.99f);   // limits are arbitrary..
 
 		return true;
 	}
@@ -217,14 +219,14 @@ struct Options
 		else if (preview_width == 0 || preview_height == 0)
 			std::cout << "    preview: default" << std::endl;
 		else
-			std::cout << "    preview: " << preview_x << "," << preview_y << ","
-					  << preview_width << "," << preview_height << std::endl;
+			std::cout << "    preview: " << preview_x << "," << preview_y << "," << preview_width
+					  << "," << preview_height << std::endl;
 		std::cout << "    transform: " << transformToString(transform) << std::endl;
 		if (roi_width == 0 || roi_height == 0)
 			std::cout << "    roi: all" << std::endl;
 		else
-			std::cout << "    roi: " << roi_x << "," << roi_y << ","
-					  << roi_width << "," << roi_height << std::endl;
+			std::cout << "    roi: " << roi_x << "," << roi_y << "," << roi_width << ","
+					  << roi_height << std::endl;
 		if (shutter)
 			std::cout << "    shutter: " << shutter << std::endl;
 		if (gain)

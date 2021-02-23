@@ -20,6 +20,7 @@ public:
 	// Reset the preview window, clearing the current buffers and being ready to
 	// show new ones.
 	virtual void Reset() override;
+
 private:
 	struct Buffer
 	{

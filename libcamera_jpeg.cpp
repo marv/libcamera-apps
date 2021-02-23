@@ -17,10 +17,8 @@ using libcamera::Stream;
 
 // In jpeg.cpp:
 void jpeg_save(std::vector<void *> const &mem, int w, int h, int stride,
-			   libcamera::PixelFormat const &pixel_format,
-			   libcamera::ControlList const &metadata,
-			   std::string const &filename,
-			   std::string const &cam_name,
+			   libcamera::PixelFormat const &pixel_format, libcamera::ControlList const &metadata,
+			   std::string const &filename, std::string const &cam_name,
 			   StillOptions const &options);
 
 // The main even loop for the application.
@@ -34,7 +32,7 @@ static void event_loop(LibcameraJpeg &app)
 	app.SetPreviewDoneCallback(std::bind(&LibcameraJpeg::QueueRequest, &app, _1));
 	auto start_time = std::chrono::high_resolution_clock::now();
 
-	for (unsigned int count = 0; ; count++)
+	for (unsigned int count = 0;; count++)
 	{
 		LibcameraJpeg::Msg msg = app.Wait();
 		if (msg.type == LibcameraJpeg::MsgType::Quit)
@@ -49,10 +47,10 @@ static void event_loop(LibcameraJpeg &app)
 			auto now = std::chrono::high_resolution_clock::now();
 			if (options.timeout && now - start_time > std::chrono::milliseconds(options.timeout))
 			{
-					app.StopCamera();
-					app.Teardown();
-					app.ConfigureStill();
-					app.StartCamera();
+				app.StopCamera();
+				app.Teardown();
+				app.ConfigureStill();
+				app.StartCamera();
 			}
 			else
 			{
@@ -71,8 +69,8 @@ static void event_loop(LibcameraJpeg &app)
 			app.StreamDimensions(stream, &w, &h, &stride);
 			CompletedRequest &payload = std::get<CompletedRequest>(msg.payload);
 			std::vector<void *> mem = app.Mmap(payload.buffers[stream]);
-			jpeg_save(mem, w, h, stride, stream->configuration().pixelFormat,
-					  payload.metadata, app.options.output, app.CameraId(), app.options);
+			jpeg_save(mem, w, h, stride, stream->configuration().pixelFormat, payload.metadata,
+					  app.options.output, app.CameraId(), app.options);
 			return;
 		}
 	}
@@ -97,6 +95,6 @@ int main(int argc, char *argv[])
 	{
 		std::cerr << "ERROR: *** " << e.what() << " ***" << std::endl;
 		return -1;
-    }
+	}
 	return 0;
 }

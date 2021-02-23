@@ -5,14 +5,14 @@
  * libcamera_encoder.cpp - libcamera video encoding class.
  */
 
+#include "encoder.hpp"
 #include "libcamera_app.hpp"
 #include "video_options.hpp"
-#include "encoder.hpp"
 
 typedef std::function<void(CompletedRequest &, libcamera::Stream *)> EncodeBufferDoneCallback;
-typedef std::function<void(void *,size_t, int64_t, bool)> EncodeOutputReadyCallback;
+typedef std::function<void(void *, size_t, int64_t, bool)> EncodeOutputReadyCallback;
 
-class LibcameraEncoder: public LibcameraApp<VideoOptions>
+class LibcameraEncoder : public LibcameraApp<VideoOptions>
 {
 public:
 	using Stream = libcamera::Stream;
@@ -21,7 +21,8 @@ public:
 	void StartEncoder()
 	{
 		createEncoder();
-		encoder_->SetInputDoneCallback(std::bind(&LibcameraEncoder::encodeBufferDone, this, std::placeholders::_1));
+		encoder_->SetInputDoneCallback(
+			std::bind(&LibcameraEncoder::encodeBufferDone, this, std::placeholders::_1));
 		encoder_->SetOutputReadyCallback(encode_output_ready_callback_);
 	}
 	// This is the callback when the encoder tells you it's finished with your input buffer.
@@ -52,16 +53,10 @@ public:
 										   mem, w, h, stride, timestamp_ns / 1000);
 		// Could use index as a reference to this buffer, but we don't seem to need it.
 	}
-	void StopEncoder()
-	{
-		encoder_.reset();
-	}
+	void StopEncoder() { encoder_.reset(); }
 
 protected:
-	virtual void createEncoder()
-	{
-		encoder_ = std::unique_ptr<Encoder>(Encoder::Create(options));
-	}
+	virtual void createEncoder() { encoder_ = std::unique_ptr<Encoder>(Encoder::Create(options)); }
 	std::unique_ptr<Encoder> encoder_;
 
 private:

@@ -69,7 +69,7 @@ static void event_loop(LibcameraEncoder &app)
 	signal(SIGUSR2, default_signal_handler);
 	pollfd p[1] = { { STDIN_FILENO, POLLIN } };
 
-	for (unsigned int count = 0; ; count++)
+	for (unsigned int count = 0;; count++)
 	{
 		LibcameraEncoder::Msg msg = app.Wait();
 		if (msg.type == LibcameraEncoder::MsgType::Quit)
@@ -111,6 +111,6 @@ int main(int argc, char *argv[])
 	{
 		std::cerr << "ERROR: *** " << e.what() << " ***" << std::endl;
 		return -1;
-    }
+	}
 	return 0;
 }

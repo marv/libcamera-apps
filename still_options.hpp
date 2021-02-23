@@ -68,7 +68,8 @@ struct StillOptions : public Options
 		if (Options::Parse(argc, argv) == false)
 			return false;
 		if ((keypress || signal) && timelapse)
-			throw std::runtime_error("keypress/signal and timelapse options are mutually exclusive");
+			throw std::runtime_error(
+				"keypress/signal and timelapse options are mutually exclusive");
 		if (sscanf(thumb.c_str(), "%u:%u:%u", &thumb_width, &thumb_height, &thumb_quality) != 3)
 			throw std::runtime_error("bad thumbnail parameters " + thumb);
 		if (strcasecmp(encoding.c_str(), "jpg") == 0)

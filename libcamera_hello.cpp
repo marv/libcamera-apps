@@ -7,8 +7,8 @@
 
 #include <chrono>
 
-#include "options.hpp"
 #include "libcamera_app.hpp"
+#include "options.hpp"
 
 using namespace std::placeholders;
 
@@ -27,7 +27,7 @@ static void event_loop(LibcameraHello &app)
 	app.SetPreviewDoneCallback(std::bind(&LibcameraHello::QueueRequest, &app, _1));
 	auto start_time = std::chrono::high_resolution_clock::now();
 
-	for (unsigned int count = 0; ; count++)
+	for (unsigned int count = 0;; count++)
 	{
 		LibcameraHello::Msg msg = app.Wait();
 		if (msg.type == LibcameraHello::MsgType::Quit)
@@ -38,8 +38,7 @@ static void event_loop(LibcameraHello &app)
 		if (options.verbose)
 			std::cout << "Viewfinder frame " << count << std::endl;
 		auto now = std::chrono::high_resolution_clock::now();
-		if (options.timeout &&
-			now - start_time > std::chrono::milliseconds(options.timeout))
+		if (options.timeout && now - start_time > std::chrono::milliseconds(options.timeout))
 			return;
 
 		CompletedRequest &completed_request = std::get<CompletedRequest>(msg.payload);
@@ -63,6 +62,6 @@ int main(int argc, char *argv[])
 	{
 		std::cerr << "ERROR: *** " << e.what() << " ***" << std::endl;
 		return -1;
-    }
+	}
 	return 0;
 }
