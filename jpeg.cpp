@@ -567,7 +567,8 @@ static void create_exif_data(PixelFormat const &pixel_format,
 			YUV_to_JPEG(pixel_format, (uint8_t *)(mem[0]), w, h, stride,
 						options.thumb_width, options.thumb_height,
 						q, 0, thumb_buffer, thumb_len);
-			if (thumb_len < 60000) // entire EXIF data must be < 65536, so this should be safe
+			// entire EXIF data must be < 65536, so this should be safe
+			if (thumb_len < 60000)
 				break;
 			free(thumb_buffer);
 			thumb_buffer = nullptr;
