@@ -11,7 +11,7 @@
 #include "null_encoder.hpp"
 #include <cstring>
 
-Encoder *Encoder::Create(VideoOptions const &options)
+Encoder* Encoder::Create(VideoOptions const &options)
 {
 	if (strcasecmp(options.codec.c_str(), "yuv420") == 0)
 		return new NullEncoder(options);
